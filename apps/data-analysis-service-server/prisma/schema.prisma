@@ -1,0 +1,29 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model DataUrl {
+  createdAt   DateTime @default(now())
+  description String?
+  id          String   @id @default(cuid())
+  updatedAt   DateTime @updatedAt
+  url         String?
+}
+
+model DataFile {
+  createdAt   DateTime              @default(now())
+  fileContent Json?
+  filename    String?
+  fileType    EnumDataFileFileType?
+  id          String                @id @default(cuid())
+  updatedAt   DateTime              @updatedAt
+}
+
+enum EnumDataFileFileType {
+  Option1
+}
